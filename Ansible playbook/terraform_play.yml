@@ -1,0 +1,17 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+
+  - name: Set timezone to Africa/Lagos
+    timezone:
+      name: Africa/Lagos
+
+  - name: Create index.html with unique content
+    copy:
+      content: |
+        <h1>Hello from instance {{ inventory_hostname }}!</h1>
+      dest: /var/www/html/index.
